@@ -1,14 +1,8 @@
 from django.shortcuts import render
-from .forms import UserForm
+from .models import Member
 
 
-def new(request):
-    params = {'name': '', 'email': '', 'form': None}
-    if request.method == 'POST':
-        form = UserForm(request.POST)
-        params['name'] = request.POST['name']
-        params['email'] = request.POST['email']
-        params['form'] = form
-    else:
-        params['form'] = UserForm()
-    return render(request, 'user/new.html', params)
+def list(request):
+    data = Member.objects.all()
+    params = {'message': 'メンバーの一覧', 'data': data}
+    return render(request, 'user/list.html', params)
