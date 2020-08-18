@@ -1,6 +1,16 @@
 from django import forms
+from .models import Member
 
 
-class UserForm(forms.Form):
-    name = forms.CharField(label='名前', max_length=100)
-    email = forms.EmailField(label='メール', max_length=100)
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = Member
+        fields = ('name', 'age')
+        labels = {
+            'name': '名前',
+            'age': '年齢'
+        }
+        help_texts = {
+            'name': '名前を入力',
+            'age': '年齢を入力'
+        }
